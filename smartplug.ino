@@ -14,15 +14,12 @@
 #define OP2   D6
 #define EEPROM_STATE_ADDRESS 128
 
-//const char* ssid     = "INC_GREENPROJECT";
-//const char* password = "12344321";
-
 WiFiClient client;
 AuthClient *authclient;
 
-#define APPID   "pieplug"
-#define KEY     "n0ZWTaGuPWcfYmR"
-#define SECRET  "hPIrrX5JI9k6HkDh7H2SftOcQ"
+#define APPID   "piesensor"
+#define KEY     "UOstvEfmL7JF6HJ"
+#define SECRET  "4DvVmXFO7ABvIpKN7FI8tEsFQmRLRM"
 #define ALIAS   "devplug"
 
 char state = 0;
