@@ -3,16 +3,34 @@
 <script src="asset/js/justgage.js"></script>
 
 <script>
-	const APPKEY    = "VumGoe6OQVxpOSK";
-    const APPSECRET = "SMUv9hiopqmnXL6T9EohipVLC";
-    const APPID     = "aundev";
- 
+	//const APPKEY    = "m5AkxcRyPPC7XJT";
+    //const APPSECRET = "zqq1JeCfh1BawOalZPSx0MPQv";
+    //const APPID     = "pieplug";
+    /*
 	var microgear = Microgear.create({
 		key: APPKEY,
 		secret: APPSECRET,
 		alias : "devplughtml"
 	});
-
+	*/
+	
+	var a = location.hash.substring(1).split(':');
+    if (a.length==3) {
+        appid = a[0];
+        appkey = a[1];
+        appsecret = a[2];
+    }
+    else {
+        alert("Please parse appid, appkey and appsecret as a hash e.g. :\n\n"+location+"#APPID:APPKEY:APPSECRET");            
+    }
+    
+	var microgear = Microgear.create({
+		key: appkey,
+		secret: appsecret,
+		alias : "pieslampherhtml"
+	});
+	var status = 0;
+	
     var state = 0;
 	var state2 = 0;
 
@@ -21,7 +39,8 @@
 			var m = msg.split(':');
 			meter1.refresh(m[0].trim());
 			meter2.refresh(m[1].trim());
-			document.getElementById("meter3").innerHTML = m[2].trim()+" kWh";
+			meter3.refresh(m[2].trim());
+			document.getElementById("meter4").innerHTML = m[3].trim()+" kWh";
 		}
 	});
 
@@ -33,7 +52,7 @@
 		state = 0;
 	    state2 = 0;
 
-		//microgear.chat('pieslampher','?');
+		
 		document.getElementById("data").innerHTML = "<FONT color=#DDDDDD>ONLINE</FONT>";
 	});
 
@@ -64,7 +83,7 @@
 
 	//----- JustGage
 
-	var meter1,meter2;
+	var meter1,meter2,meter3;
 	window.onload = function(){
 		meter1 = new JustGage({
 			id: "meter1", 
@@ -78,6 +97,15 @@
 		});
 		meter2 = new JustGage({
 			id: "meter2", 
+			decimals: true,
+			value: 0, 
+			min: 0,
+			max: 230,
+			title: "Voltage",
+			label: "V"
+		});
+		meter3 = new JustGage({
+			id: "meter3", 
 			decimals: true,
 			value: 0, 
 			min: 0,
@@ -167,11 +195,11 @@ a.btn.btn-red {
 		text-align: center;
 		font-family: sans-serif;
 	}
-	#meter1, #meter2 {
+	#meter1, #meter2, #meter3 {
 		width:600px; height:480px;
 		display: inline-block;
 	}
-	#meter3 {
+	#meter4 {
 		font-size: 48px;
 		font-weight: bold;
 	}
@@ -186,5 +214,6 @@ a.btn.btn-red {
 <div id="meter">
 	<div id="meter1"></div>
 	<div id="meter2"></div>
-	<div id="meter3">0.00 kWh</div>
+	<div id="meter3"></div>
+	<div id="meter4">0.00 kWh</div>
 </div>
