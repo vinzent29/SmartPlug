@@ -3,17 +3,6 @@
 <script src="asset/js/justgage.js"></script>
 
 <script>
-	//const APPKEY    = "m5AkxcRyPPC7XJT";
-    //const APPSECRET = "zqq1JeCfh1BawOalZPSx0MPQv";
-    //const APPID     = "pieplug";
-    /*
-	var microgear = Microgear.create({
-		key: APPKEY,
-		secret: APPSECRET,
-		alias : "devplughtml"
-	});
-	*/
-	
 	var a = location.hash.substring(1).split(':');
     if (a.length==3) {
         appid = a[0];
@@ -56,7 +45,7 @@
 		document.getElementById("data").innerHTML = "<FONT color=#DDDDDD>ONLINE</FONT>";
 	});
 
-	microgear.connect(APPID);
+	microgear.connect(appid);
 
 	function toggle() {
         switch (state) {
