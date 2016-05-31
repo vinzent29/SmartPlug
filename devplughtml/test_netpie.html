@@ -16,7 +16,7 @@
 	var microgear = Microgear.create({
 		key: appkey,
 		secret: appsecret,
-		alias : "pieslampherhtml"
+		alias : "devplughtml"
 	});
 	var status = 0;
 	
@@ -45,7 +45,13 @@
 		document.getElementById("data").innerHTML = "<FONT color=#DDDDDD>ONLINE</FONT>";
 	});
 
-	microgear.connect(appid);
+	microgear.on('disconnected', function() {
+		alert('microgear is disconnected....');
+	});
+
+	microgear.resettoken(function(err) {
+		microgear.connect(appid);
+	});
 
 	function toggle() {
         switch (state) {
