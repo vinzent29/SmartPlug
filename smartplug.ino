@@ -14,12 +14,15 @@
 #define OP2   D6
 #define EEPROM_STATE_ADDRESS 128
 
-const char* ssid     = "wasan";
-const char* password = "028719119";
+//const char* ssid     = "INC_GREENPROJECT";
+//const char* password = "12344321";
 
-#define APPID   "aundev"
-#define KEY     "VumGoe6OQVxpOSK"
-#define SECRET  "SMUv9hiopqmnXL6T9EohipVLC"
+WiFiClient client;
+AuthClient *authclient;
+
+#define APPID   "pieplug"
+#define KEY     "n0ZWTaGuPWcfYmR"
+#define SECRET  "hPIrrX5JI9k6HkDh7H2SftOcQ"
 #define ALIAS   "devplug"
 
 char state = 0;
@@ -48,8 +51,6 @@ char data[50];
 float getVPP(void);
 void  calI(void);
  
-WiFiClient client;
-AuthClient *authclient;
 MicroGear microgear(client);
 
 void sendState() {
@@ -124,9 +125,19 @@ void setup(){
   pinMode(D7, OUTPUT);     // Relay1 (OP1)
   digitalWrite(LED_BUILTIN, HIGH);  // Turn the LED off by making the voltage HIGH
 
+    WiFiManager wifiManager;
+    wifiManager.setTimeout(180);
+
+    if(!wifiManager.autoConnect("pieplug")) {
+      Serial.println("Failed to connect and hit timeout");
+      delay(3000);
+      ESP.reset();
+      delay(5000);
+    }
+    
   microgear.on(MESSAGE,onMsghandler);
   microgear.on(CONNECTED,onConnected);
-
+/*
   if (WiFi.begin(ssid, password)) {
     while (WiFi.status() != WL_CONNECTED) {
           delay(500);
@@ -135,11 +146,11 @@ void setup(){
   Serial.println("WiFi connected");  
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
-
-  microgear.resetToken();
+*/
+  //microgear.resetToken();
   microgear.init(KEY,SECRET,ALIAS);
   microgear.connect(APPID);
-  }
+  //}
   
 
   
@@ -232,7 +243,7 @@ float getVPP()
       dtostrf((real_power/1000), 6, 2, P_buff);
       dtostrf((kwh_sum/1000), 6, 2, kwh_buff);
 
-      sprintf(data,"%s:%s:%s",I_buff,P_buff,kwh_buff);
+      sprintf(data,"%s:229.40:%s:%s",I_buff,P_buff,kwh_buff);
       Serial.println(data);                        // Real power
     
  }
