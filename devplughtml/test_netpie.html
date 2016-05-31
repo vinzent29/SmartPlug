@@ -1,6 +1,18 @@
-<script src="http://netpie.io/microgear.js"></script>
+<script src="https://cdn.netpie.io/microgear.js"></script>
 <script src="asset/js/raphael-2.1.4.min.js"></script>
 <script src="asset/js/justgage.js"></script>
+
+<div id="data" align=right><FONT COLOR=#DDDDDD>OFFLINE</FONT></div>
+<br><br><br>
+<center><a class="btn btn-blue" onclick="toggle()">plug1</a></center>
+<center><a class="btn btn-blue" onclick="toggle2()">plug2</a></center>
+<div id="data" align="center"><font style="font-size: 64px;font-weight: bold;">SMART PLUG</font></div>
+<div id="meter">
+	<div id="meter1"></div>
+	<div id="meter2"></div>
+	<div id="meter3"></div>
+	<div id="meter4">0.00 kWh</div>
+</div>
 
 <script>
 	var a = location.hash.substring(1).split(':');
@@ -200,15 +212,3 @@ a.btn.btn-red {
 	}
 
 </style>
-
-<div id="data" align=right><FONT COLOR=#DDDDDD>OFFLINE</FONT></div>
-<br><br><br>
-<center><a href="#" class="btn btn-blue" onclick="toggle()">plug1</a></center>
-<center><a href="#" class="btn btn-blue" onclick="toggle2()">plug2</a></center>
-<div id="data" align="center"><font style="font-size: 64px;font-weight: bold;">SMART PLUG</font></div>
-<div id="meter">
-	<div id="meter1"></div>
-	<div id="meter2"></div>
-	<div id="meter3"></div>
-	<div id="meter4">0.00 kWh</div>
-</div>
